@@ -64,15 +64,6 @@ combinerCheck <- function(errNo, type, error = "stop"){
 #' @details a proper combinedTable must have the following characteristics to
 #' be deemed valid for \code{metabCombiner} operations:
 #'
-<<<<<<< HEAD
-#' 1) It must be a data.frame with at least 15 columns and at least 1 row
-#' 2) The first 15 columns must be named "idx","idy","mzx","mzy","rtx","rty",
-#'    "rtProj","Qx","Qy","group","score","rankX","rankY","adductx", & "adducty"
-#'    in this exact order
-#' 3) The first 15 columns must be of class: "character","character", "numeric",
-#'    "numeric","numeric", "numeric", "numeric","numeric","numeric","integer",
-#'    "numeric", "integer", "integer","character", "character"
-=======
 #' 1) It must be a data.frame with at least 16 columns and at least 1 row
 #' 2) The first 16 columns must be named "rowID", "idx","idy","mzx","mzy","rtx",
 #'    "rty", "rtProj","Qx","Qy","group","score","rankX","rankY","adductx", &
@@ -81,7 +72,6 @@ combinerCheck <- function(errNo, type, error = "stop"){
 #'    "numeric","numeric","numeric", "numeric", "numeric","numeric","numeric",
 #'    "integer", "numeric", "integer", "integer","character", "character"
 #'
->>>>>>> ccad5df... minor documentation fix
 #' 4)  The group column must have no missing or negative values
 #'
 #' Failing any of these criteria causes an error
