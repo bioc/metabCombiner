@@ -38,7 +38,7 @@ combinerCheck <- function(errNo, type, error = "stop"){
             c("input object is not of class 'metabCombiner'",
             "combinedTable in input object is invalid",
             "duplicate dataset identifiers not allowed",
-            "row name mismatch between combinedTable and featdata"
+            "rowID mismatch between combinedTable and featdata"
             ),
         "metabData" =
             c("input object is not of class 'metabData'",
@@ -74,7 +74,7 @@ combinerCheck <- function(errNo, type, error = "stop"){
 #'
 #' 4)  The group column must have no missing or negative values
 #'
-#' Failing any of these criteria causes an error
+#' Failing any one of these criteria causes an error
 #'
 #' @param object  Any R object.
 #'
@@ -83,8 +83,8 @@ isCombinedTable <- function(object){
     if(!is.data.frame(object))
         return(1)
 
-    expected <- c("idx","idy","mzx","mzy","rtx","rty","rtProj","Qx","Qy",
-                "group","score","rankX","rankY","adductx","adducty")
+    expected <- c("rowID", "idx","idy","mzx","mzy","rtx","rty","rtProj","Qx",
+                "Qy", "group","score","rankX","rankY","adductx","adducty")
 
     if(ncol(object) <= length(expected)) return(2)
 
@@ -98,7 +98,7 @@ isCombinedTable <- function(object){
                         "numeric", "numeric","numeric","numeric","integer",
                         "numeric", "integer", "integer","character","character")
 
-    if(!identical(coltypes[seq(1,length(expected))], correct_types))
+    if(!identical(coltypes[seq(2,length(expected))], correct_types))
         return(5)
 
     if(any(is.na(object[["group"]])) | any(object[["group"]] < 0))
@@ -131,7 +131,7 @@ isMetabCombiner <- function(object){
     if(any(duplicated(datasets(object))))
         return(3)
 
-    if(!identical(row.names(combinedTable(object)),row.names(featdata(object))))
+    if(!identical(combinedTable(object)[["rowID"]], featdata(object)[["rowID"]]))
         return(4)
 
     return(0)
